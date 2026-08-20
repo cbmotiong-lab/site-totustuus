@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Associação Beneficente Totus Tuus, Fortaleza CE</title>
+<meta name="description" content="Associação civil sem fins lucrativos em Fortaleza (CE), atuando com saúde, educação inclusiva e assistência social a crianças, adolescentes, idosos e famílias em situação de vulnerabilidade.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,440;0,9..144,560;0,9..144,650;1,9..144,440&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul: #2391DE;
+    --azul-profundo: #102B40;
+    --azul-medio: #165079;
+    --gelo: #F2F8FD;
+    --gelo-2: #E5F2FB;
+    --dourado: #D99A34;
+    --dourado-claro: #F1C778;
+    --tinta: #1C2530;
+    --branco: #FFFFFF;
+    --serif: 'Fraunces', serif;
+    --sans: 'Karla', sans-serif;
+    --container: 1180px;
+    --radius: 14px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  *{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+  }
+  body{
+    font-family:var(--sans);
+    color:var(--tinta);
+    background:var(--branco);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  h1,h2,h3{font-family:var(--serif);font-weight:560;line-height:1.12;color:var(--azul-profundo);letter-spacing:-.01em;}
+  :focus-visible{outline:3px solid var(--dourado);outline-offset:3px;}
+  .container{max-width:var(--container);margin:0 auto;padding:0 28px;}
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--dourado);color:var(--azul-profundo);padding:12px 20px;z-index:999;font-weight:700;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  .eyebrow{
+    font-family:var(--sans);font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    font-size:.76rem;color:var(--azul);display:block;margin-bottom:16px;
+  }
+  .eyebrow--light{color:var(--dourado-claro);}
+
+  /* ---------- entrance animation (hero only; CSS-only, no JS dependency) ---------- */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .js-anim{animation:fadeUp .9s ease both;}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:15px 28px;border-radius:10px;font-weight:700;font-size:.98rem;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    white-space:nowrap;
+  }
+  .btn--gold{background:var(--dourado);color:var(--azul-profundo);}
+  .btn--gold:hover{background:var(--dourado-claro);transform:translateY(-2px);box-shadow:0 10px 24px rgba(217,154,52,.35);}
+  .btn--outline{border:1.5px solid rgba(255,255,255,.75);color:var(--branco);}
+  .btn--outline:hover{background:rgba(255,255,255,.12);transform:translateY(-2px);}
+  .btn--outline-blue{border:1.5px solid var(--azul);color:var(--azul-profundo);}
+  .btn--outline-blue:hover{background:var(--gelo-2);transform:translateY(-2px);}
+  .btn--sm{padding:11px 20px;font-size:.88rem;border-radius:8px;}
+
+  /* ---------- icons ---------- */
+  .icon{width:44px;height:38px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    padding:18px 0;transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .nav__brand{display:flex;align-items:center;gap:12px;}
+  .nav__brand img{height:46px;width:auto;border-radius:8px;transition:height .35s ease;}
+  .nav__brand-text{font-family:var(--serif);font-weight:560;font-size:1.05rem;line-height:1.1;color:var(--branco);transition:color .35s ease;}
+  .nav__brand-text span{display:block;font-family:var(--sans);font-weight:600;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85;}
+  .nav__links{display:flex;align-items:center;gap:34px;}
+  .nav__link{font-weight:600;font-size:.94rem;color:var(--branco);position:relative;transition:color .35s ease;}
+  .nav__link::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--dourado);transition:width .25s ease;}
+  .nav__link:hover::after{width:100%;}
+  .nav__cta{margin-left:6px;}
+  .nav__toggle{display:none;color:var(--branco);}
+
+  .nav.is-scrolled{background:rgba(242,248,253,.92);backdrop-filter:blur(10px);box-shadow:0 8px 30px rgba(16,43,64,.08);padding:10px 0;}
+  .nav.is-scrolled .nav__brand-text{color:var(--azul-profundo);}
+  .nav.is-scrolled .nav__link{color:var(--azul-profundo);}
+  .nav.is-scrolled .nav__brand img{height:38px;}
+  .nav.is-scrolled .btn--outline{border-color:var(--azul-profundo);color:var(--azul-profundo);}
+  .nav.is-scrolled .btn--outline:hover{background:var(--gelo-2);}
+  .nav.is-scrolled .nav__toggle{color:var(--azul-profundo);}
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;min-height:100svh;display:flex;align-items:flex-end;
+    background:linear-gradient(105deg, rgba(9,26,41,.94) 0%, rgba(11,33,52,.82) 35%, rgba(16,43,64,.38) 62%, rgba(16,43,64,.12) 100%), url('images/educacao-infantil.jpg') center 38% / cover no-repeat;
+    padding:170px 0 76px;
+  }
+  .hero__content{max-width:660px;}
+  .hero h1{color:var(--branco);font-size:clamp(2.3rem,4.6vw,3.6rem);margin-bottom:22px;}
+  .hero h1 .hero__accent{color:var(--dourado-claro);}
+  .hero p{color:rgba(255,255,255,.88);font-size:1.14rem;max-width:520px;margin-bottom:36px;}
+  .hero__actions{display:flex;gap:16px;flex-wrap:wrap;}
+
+  /* ============ QUEM SOMOS ============ */
+  .sobre{padding:118px 0 100px;background:var(--branco);}
+  .sobre__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:start;}
+  .sobre__lead{font-family:var(--serif);font-weight:440;font-size:1.5rem;line-height:1.42;color:var(--azul-profundo);margin-bottom:26px;}
+  .sobre__body p{color:#3C4A57;font-size:1.03rem;margin-bottom:18px;}
+  .sobre__body strong{color:var(--azul-profundo);}
+  .fatos{display:flex;flex-direction:column;gap:16px;}
+  .fato{background:var(--gelo);border-left:3px solid var(--azul);border-radius:0 var(--radius) var(--radius) 0;padding:22px 26px;}
+  .fato__label{font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:var(--azul-medio);margin-bottom:6px;}
+  .fato__valor{font-family:var(--serif);font-size:1.28rem;color:var(--azul-profundo);font-weight:500;}
+
+  /* ============ MISSÃO / VISÃO / VALORES ============ */
+  .missao{padding:100px 0;background:var(--gelo);}
+  .missao__head{max-width:640px;margin-bottom:56px;}
+  .missao__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .mv-card{background:var(--branco);border-radius:var(--radius);padding:36px 32px;box-shadow:0 14px 34px rgba(16,43,64,.05);}
+  .mv-card h3{font-size:1.3rem;margin-bottom:14px;}
+  .mv-card p{color:#3C4A57;font-size:.98rem;}
+  .valores-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+  .valores-tags span{background:var(--gelo-2);color:var(--azul-medio);font-weight:700;font-size:.82rem;padding:7px 14px;border-radius:999px;}
+
+  /* ============ ÁREAS DE ATUAÇÃO ============ */
+  .atuacao{padding:118px 0 100px;background:var(--branco);}
+  .atuacao__head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:58px;flex-wrap:wrap;}
+  .atuacao__head h2{max-width:560px;}
+  .atuacao__head p{color:#5A6B78;max-width:380px;font-size:1rem;}
+  .atuacao__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .area-card{
+    border:1px solid #E4EDF4;border-radius:var(--radius);padding:34px 30px;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .area-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(16,43,64,.09);border-color:transparent;}
+  .area-card .icon{color:var(--azul);margin-bottom:20px;}
+  .area-card h3{font-size:1.14rem;margin-bottom:10px;}
+  .area-card p{color:#5A6B78;font-size:.94rem;}
+  .area-card--wide{grid-column:span 1;}
+  .atuacao__grid > .area-card:nth-child(4){grid-column:1 / span 1;}
+
+  /* ============ EM AÇÃO ============ */
+  .acao{padding:120px 0;background:var(--azul-profundo);}
+  .acao__head{max-width:640px;margin-bottom:56px;}
+  .acao__head h2{color:var(--branco);}
+  .acao__head p{color:rgba(255,255,255,.72);font-size:1.02rem;margin-top:16px;}
+  .acao__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative;}
+  .foto-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:var(--radius);overflow:hidden;}
+  .foto-card__img{aspect-ratio:4/3;overflow:hidden;}
+  .foto-card__img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .foto-card:hover .foto-card__img img{transform:scale(1.06);}
+  .foto-card__body{padding:24px 24px 28px;}
+  .foto-card__tag{display:inline-block;font-weight:800;letter-spacing:.09em;text-transform:uppercase;font-size:.68rem;color:var(--dourado-claro);margin-bottom:10px;}
+  .foto-card__body h3{color:var(--branco);font-size:1.08rem;margin-bottom:10px;font-weight:500;}
+  .foto-card__body p{color:rgba(255,255,255,.68);font-size:.9rem;}
+
+  /* ============ COMO AJUDAR ============ */
+  .ajudar{padding:118px 0 100px;background:var(--branco);}
+  .ajudar__head{text-align:center;max-width:620px;margin:0 auto 58px;}
+  .ajudar__head p{color:#5A6B78;font-size:1.03rem;margin-top:14px;}
+  .ajudar__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .ajuda-card{background:var(--gelo);border-radius:var(--radius);padding:38px 32px;display:flex;flex-direction:column;align-items:flex-start;}
+  .ajuda-card .icon{color:var(--dourado);margin-bottom:18px;}
+  .ajuda-card h3{font-size:1.2rem;margin-bottom:10px;}
+  .ajuda-card p{color:#4A5A67;font-size:.95rem;margin-bottom:24px;flex-grow:1;}
+
+  /* ============ DOE VIA PIX ============ */
+  .pix{padding:20px 0 118px;background:var(--branco);}
+  .pix__head{max-width:600px;margin:0 auto 44px;text-align:center;}
+  .pix__head .eyebrow{justify-content:center;}
+  .pix__head p{color:#5A6B78;font-size:1.02rem;margin-top:14px;}
+  .pix__card{
+    max-width:380px;margin:0 auto;background:var(--gelo);border-radius:var(--radius);
+    padding:40px 36px;text-align:center;border:1px solid #E4EDF4;
+  }
+  .pix__qr{width:100%;max-width:220px;margin:0 auto 26px;border-radius:10px;display:block;border:1px solid #E4EDF4;}
+  .pix__copy-btn{width:100%;justify-content:center;}
+  .pix__manual{margin-top:24px;padding-top:24px;border-top:1px solid #DCE9F3;display:flex;flex-direction:column;gap:10px;align-items:center;}
+  .pix__manual span{font-size:.8rem;color:#7C8B97;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+  .pix__key{
+    font-family:var(--sans);font-weight:700;font-size:1.1rem;color:var(--azul-profundo);
+    letter-spacing:.02em;padding:10px 18px;border-radius:8px;border:1.5px dashed #B9D3E8;
+    background:var(--branco);transition:background .2s ease, border-color .2s ease;
+  }
+  .pix__key:hover{background:var(--gelo-2);border-color:var(--azul);}
+  .pix__status{font-size:.84rem;font-weight:700;color:#1D7A4C;min-height:1.2em;margin-top:16px;}
+
+  /* ============ TRANSPARÊNCIA ============ */
+  .transparencia{background:var(--gelo-2);padding:44px 0;border-top:1px solid #D9E9F5;border-bottom:1px solid #D9E9F5;}
+  .transparencia__inner{display:flex;flex-wrap:wrap;gap:14px 40px;align-items:center;}
+  .transparencia__item{font-size:.86rem;color:var(--azul-medio);}
+  .transparencia__item strong{color:var(--azul-profundo);display:block;font-family:var(--serif);font-size:1rem;font-weight:500;}
+
+  /* ============ CONTATO ============ */
+  .contato{padding:118px 0 110px;background:var(--branco);}
+  .contato__grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start;}
+  .contato__list{margin-top:30px;display:flex;flex-direction:column;gap:22px;}
+  .contato__item{display:flex;gap:16px;align-items:flex-start;}
+  .contato__item .icon{width:26px;height:26px;color:var(--azul);flex-shrink:0;margin-top:2px;}
+  .contato__item h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--azul-medio);margin-bottom:4px;font-weight:800;}
+  .contato__item p{color:var(--azul-profundo);font-size:1.02rem;font-weight:600;}
+  .placeholder{color:#9AAAB6;font-weight:600;font-style:italic;}
+  .mapa{border-radius:var(--radius);overflow:hidden;border:1px solid #E4EDF4;box-shadow:0 20px 44px rgba(16,43,64,.08);}
+  .mapa iframe{width:100%;height:420px;border:0;display:block;}
+
+  /* ============ FOOTER ============ */
+  .rodape{background:var(--azul-profundo);color:rgba(255,255,255,.72);padding:68px 0 30px;}
+  .rodape__grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:50px;margin-bottom:54px;}
+  .rodape__brand{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+  .rodape__brand img{height:52px;border-radius:8px;}
+  .rodape__brand-text{font-family:var(--serif);color:var(--branco);font-size:1.15rem;}
+  .rodape p{font-size:.92rem;max-width:320px;}
+  .rodape h5{color:var(--branco);font-family:var(--sans);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px;font-weight:800;}
+  .rodape__links{display:flex;flex-direction:column;gap:12px;}
+  .rodape__links a{font-size:.92rem;transition:color .2s ease;}
+  .rodape__links a:hover{color:var(--dourado-claro);}
+  .rodape__bottom{border-top:1px solid rgba(255,255,255,.14);padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.82rem;color:rgba(255,255,255,.5);}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:960px){
+    .sobre__grid,.contato__grid{grid-template-columns:1fr;gap:44px;}
+    .missao__grid,.atuacao__grid,.acao__grid,.ajudar__grid{grid-template-columns:1fr 1fr;}
+    .rodape__grid{grid-template-columns:1fr 1fr;}
+    .rodape__grid > :first-child{grid-column:1/-1;}
+  }
+  @media (max-width:760px){
+    .nav__links{
+      position:fixed;top:0;right:0;height:100svh;width:min(78vw,320px);
+      background:var(--azul-profundo);flex-direction:column;align-items:flex-start;
+      padding:110px 32px 40px;gap:26px;transform:translateX(100%);transition:transform .4s ease;
+    }
+    .nav__links.is-open{transform:translateX(0);}
+    .nav__links .nav__link{color:var(--branco) !important;font-size:1.1rem;}
+    .nav__toggle{display:block;z-index:210;}
+    .nav__cta{margin-left:0;margin-top:10px;}
+    .hero{padding-top:130px;min-height:auto;padding-bottom:80px;}
+    .hero h1{font-size:2.15rem;}
+    .missao__grid,.atuacao__grid,.acao__grid,.ajudar__grid,.rodape__grid{grid-template-columns:1fr;}
+    .atuacao__head{flex-direction:column;align-items:flex-start;}
+    section{padding-top:80px !important;padding-bottom:70px !important;}
+    .transparencia__inner{flex-direction:column;align-items:flex-start;gap:18px;}
+  }
+
+  ::selection{background:var(--dourado-claro);color:var(--azul-profundo);}
+</style>
+</head>
+<body>
+<a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="#inicio" class="nav__brand">
+      <img src="images/icone.png" alt="Símbolo da Associação Totus Tuus: mãos em concha segurando um coração com uma cruz">
+      <span class="nav__brand-text">Totus Tuus<span>Associação Beneficente</span></span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#quem-somos" class="nav__link">Quem Somos</a>
+      <a href="#atuacao" class="nav__link">Nossa Atuação</a>
+      <a href="#em-acao" class="nav__link">Em Ação</a>
+      <a href="#contato" class="nav__link">Contato</a>
+      <a href="#ajudar" class="btn btn--gold btn--sm nav__cta">Como Ajudar</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7H23M3 13H23M3 19H23"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio">
+    <div class="container hero__content">
+      <p class="eyebrow eyebrow--light js-anim" style="animation-delay:.05s;">Associação Beneficente Totus Tuus · Fortaleza, CE</p>
+      <h1 class="js-anim" style="animation-delay:.15s;">Totalmente a serviço de <span class="hero__accent">quem mais precisa</span></h1>
+      <p class="js-anim" style="animation-delay:.3s;">Cuidamos de crianças, adolescentes, idosos e famílias em situação de vulnerabilidade no bairro Granja Lisboa e em Fortaleza, com saúde, educação inclusiva e acolhimento no dia a dia.</p>
+      <div class="hero__actions js-anim" style="animation-delay:.45s;">
+        <a href="#atuacao" class="btn btn--gold">Conheça nossa atuação</a>
+        <a href="#ajudar" class="btn btn--outline">Como ajudar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUEM SOMOS ============ -->
+  <section class="sobre" id="quem-somos">
+    <div class="container sobre__grid">
+      <div>
+        <p class="eyebrow">Quem Somos</p>
+        <p class="sobre__lead">O nome Totus Tuus vem do latim e significa “totalmente teu”. Fizemos dele um jeito de trabalhar.</p>
+        <div class="sobre__body">
+          <p>A <strong>Associação Beneficente Totus Tuus</strong> é uma associação civil de direito privado, sem fins econômicos, com sede no bairro <strong>Granja Lisboa, em Fortaleza (CE)</strong>. Nascemos do compromisso de um grupo de pessoas dispostas a colocar fé e ação a serviço do próximo, de forma prática, próxima e constante.</p>
+          <p>Fomos constituídos em Assembleia Geral presidida por <strong>Rene de Sousa Santos</strong>, com secretariado de <strong>Amanda Kimberlly Cardoso dos Santos</strong>, e registrados no 3º Registro de Pessoas Jurídicas de Fortaleza-CE. Desde então, seguimos construindo nossa atuação com os pés no bairro e o compromisso renovado a cada atividade.</p>
+        </div>
+      </div>
+      <div class="fatos">
+        <div class="fato">
+          <div class="fato__label">Fundação</div>
+          <div class="fato__valor">30 de outubro de 2025</div>
+        </div>
+        <div class="fato">
+          <div class="fato__label">Sede</div>
+          <div class="fato__valor">Granja Lisboa, Fortaleza (CE)</div>
+        </div>
+        <div class="fato">
+          <div class="fato__label">Natureza jurídica</div>
+          <div class="fato__valor">Associação civil sem fins lucrativos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MISSÃO / VISÃO / VALORES ============ -->
+  <section class="missao" id="missao">
+    <div class="container">
+      <div class="missao__head">
+        <p class="eyebrow">Para onde vamos</p>
+        <h2 style="font-size:2rem;">Missão, visão e valores</h2>
+      </div>
+      <div class="missao__grid">
+        <div class="mv-card">
+          <h3>Missão</h3>
+          <p>Prestar assistência integral em saúde, reabilitação, educação e convivência a crianças, adolescentes, adultos e idosos em situação de vulnerabilidade, promovendo inclusão e dignidade.</p>
+        </div>
+        <div class="mv-card">
+          <h3>Visão</h3>
+          <p>Ser reconhecida em Fortaleza como referência em cuidado integral e inclusão social, ampliando o alcance das nossas ações a cada ano.</p>
+        </div>
+        <div class="mv-card">
+          <h3>Valores</h3>
+          <div class="valores-tags">
+            <span>Acolhimento</span><span>Dignidade</span><span>Inclusão</span><span>Solidariedade</span><span>Serviço</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ÁREAS DE ATUAÇÃO ============ -->
+  <section class="atuacao" id="atuacao">
+    <div class="container">
+      <div class="atuacao__head">
+        <div>
+          <p class="eyebrow">Onde colocamos a mão</p>
+          <h2 style="font-size:2.1rem;">Nossas frentes de atuação</h2>
+        </div>
+        <p>Definidas em nosso Estatuto Social, e colocadas em prática de acordo com as necessidades de cada comunidade onde atuamos.</p>
+      </div>
+      <div class="atuacao__grid">
+        <div class="area-card">
+          <svg class="icon" viewBox="0 0 48 40"><path d="M6 18C6 27.5 14 34 24 34C34 34 42 27.5 42 18"/><path d="M24 6V18M18.5 12H29.5"/></svg>
+          <h3>Saúde e Reabilitação</h3>
+          <p>Medicina física e reabilitação em neurologia, ortopedia, traumatologia e reumatologia, além de apoio à confecção de próteses, órteses e cadeiras de rodas.</p>
+        </div>
+        <div class="area-card">
+          <svg class="icon" viewBox="0 0 48 40"><path d="M6 18C6 27.5 14 34 24 34C34 34 42 27.5 42 18"/><path d="M24 19V6M24 6L18 12M24 6L30 12"/></svg>
+          <h3>Apoio a Dependentes Químicos</h3>
+          <p>Assistência a crianças, adolescentes e adultos em recuperação do uso de álcool e outras substâncias, com foco no retorno à família e à comunidade.</p>
+        </div>
+        <div class="area-card">
+          <svg class="icon" viewBox="0 0 48 40"><path d="M6 18C6 27.5 14 34 24 34C34 34 42 27.5 42 18"/><path d="M24 4L26.3 10.2L33 11.2L28.2 15.6L29.6 22L24 18.7L18.4 22L19.8 15.6L15 11.2L21.7 10.2Z"/></svg>
+          <h3>Educação Inclusiva</h3>
+          <p>Metodologias e técnicas educacionais inclusivas, além de cursos, estudos e seminários que ampliam oportunidades para crianças e adolescentes.</p>
+        </div>
+        <div class="area-card">
+          <svg class="icon" viewBox="0 0 48 40"><path d="M6 18C6 27.5 14 34 24 34C34 34 42 27.5 42 18"/><path d="M24 20C24 20 17.5 15.5 17.5 11.8C17.5 9.3 19.4 7.5 21.7 7.5C23 7.5 24 8.4 24 9.9C24 8.4 25 7.5 26.3 7.5C28.6 7.5 30.5 9.3 30.5 11.8C30.5 15.5 24 20 24 20Z"/></svg>
+          <h3>Assistência Social</h3>
+          <p>Cuidado com idosos, pessoas com deficiência, portadores de doenças infectocontagiosas e famílias em vulnerabilidade, com ações de saúde e prevenção.</p>
+        </div>
+        <div class="area-card">
+          <svg class="icon" viewBox="0 0 48 40"><path d="M6 18C6 27.5 14 34 24 34C34 34 42 27.5 42 18"/><circle cx="24" cy="12" r="2.4"/><path d="M24 7.5V4M28.5 12H32M24 16.5V20M19.5 12H16M27.2 8.8L29.6 6.3M27.2 15.2L29.6 17.6M20.8 8.8L18.4 6.3M20.8 15.2L18.4 17.6"/></svg>
+          <h3>Ação Comunitária</h3>
+          <p>Radiodifusão comunitária, iniciativas culturais e de utilidade pública que fortalecem os laços com os bairros onde atuamos.</p>
+        </div>
+        <div class="area-card" style="background:var(--azul);color:white;display:flex;flex-direction:column;justify-content:center;">
+          <h3 style="color:white;">Quer saber mais sobre um projeto específico?</h3>
+          <p style="color:rgba(255,255,255,.85);margin-bottom:20px;">Fale com a nossa equipe e conheça de perto o que estamos construindo.</p>
+          <a href="#contato" class="btn btn--outline" style="align-self:flex-start;">Falar com a associação</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EM AÇÃO ============ -->
+  <section class="acao" id="em-acao">
+    <div class="container">
+      <div class="acao__head">
+        <p class="eyebrow eyebrow--light">No dia a dia</p>
+        <h2 style="font-size:2.1rem;">O que já colocamos em prática</h2>
+        <p>Registros de atividades recentes realizadas com crianças e adolescentes em escolas parceiras e em nossos espaços de convivência.</p>
+      </div>
+      <div class="acao__grid">
+        <article class="foto-card">
+          <div class="foto-card__img"><img src="images/campanha-antibullying.jpg" alt="Crianças em uniforme escolar seguram uma faixa com os dizeres 'Todo mundo merece respeito, diga não ao bullying', em frente a um painel decorado sobre o tema bullying"></div>
+          <div class="foto-card__body">
+            <span class="foto-card__tag">Campanha institucional</span>
+            <h3>Diga não ao bullying</h3>
+            <p>Levamos a escolas parceiras uma campanha construída com as próprias crianças, para lembrar que todo mundo merece respeito.</p>
+          </div>
+        </article>
+        <article class="foto-card">
+          <div class="foto-card__img"><img src="images/semana-conscientizacao-tea.jpg" alt="Alunos seguram cartazes coloridos com a sigla TEA e palavras como 'aplaudo' e 'acolho', durante apresentação escolar sobre conscientização do autismo"></div>
+          <div class="foto-card__body">
+            <span class="foto-card__tag">Conscientização</span>
+            <h3>Semana de conscientização sobre o TEA</h3>
+            <p>Alunos e educadores juntos por um ambiente escolar mais acolhedor e atento às crianças autistas.</p>
+          </div>
+        </article>
+        <article class="foto-card">
+          <div class="foto-card__img"><img src="images/educacao-infantil.jpg" alt="Crianças pequenas pintam em uma mesa coletiva, com um mural de mãozinhas coloridas ao fundo"></div>
+          <div class="foto-card__body">
+            <span class="foto-card__tag">Educação infantil</span>
+            <h3>Arte e primeira infância</h3>
+            <p>Pintura, cor e expressão para os pequenos descobrirem o mundo com as próprias mãos.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMO AJUDAR ============ -->
+  <section class="ajudar" id="ajudar">
+    <div class="container">
+      <div class="ajudar__head">
+        <p class="eyebrow">Faça parte</p>
+        <h2 style="font-size:2.1rem;">Toda mão ajuda</h2>
+        <p>Existem várias formas de caminhar com a gente. Escolha a que mais combina com você.</p>
+      </div>
+      <div class="ajudar__grid">
+        <div class="ajuda-card">
+          <svg class="icon" viewBox="0 0 48 40"><path d="M6 18C6 27.5 14 34 24 34C34 34 42 27.5 42 18"/><path d="M16 16C16 12.5 19.5 10 24 10C28.5 10 32 12.5 32 16"/></svg>
+          <h3>Seja voluntário</h3>
+          <p>Ofereça seu tempo e talento em nossas atividades, campanhas e projetos com crianças e famílias.</p>
+          <a href="#contato" class="btn btn--outline-blue btn--sm">Quero ser voluntário</a>
+        </div>
+        <div class="ajuda-card">
+          <svg class="icon" viewBox="0 0 48 40"><path d="M6 18C6 27.5 14 34 24 34C34 34 42 27.5 42 18"/><path d="M24 5C24 5 17.5 13.5 17.5 18.5C17.5 22.1 20.4 25 24 25C27.6 25 30.5 22.1 30.5 18.5C30.5 13.5 24 5 24 5Z"/></svg>
+          <h3>Faça uma doação</h3>
+          <p>Contribua com o que estiver ao seu alcance. Cada valor sustenta diretamente o nosso trabalho.</p>
+          <a href="#doe-pix" class="btn btn--outline-blue btn--sm">Doar via Pix</a>
+        </div>
+        <div class="ajuda-card">
+          <svg class="icon" viewBox="0 0 48 40"><path d="M6 18C6 27.5 14 34 24 34C34 34 42 27.5 42 18"/><circle cx="19.5" cy="13" r="6.5"/><circle cx="27.5" cy="13" r="6.5"/></svg>
+          <h3>Seja um parceiro</h3>
+          <p>Empresas e instituições podem apoiar projetos específicos ou firmar parcerias contínuas com a associação.</p>
+          <a href="#contato" class="btn btn--outline-blue btn--sm">Vamos conversar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pix" id="doe-pix">
+      <div class="container">
+        <div class="pix__head">
+          <p class="eyebrow">Doe agora</p>
+          <h2 style="font-size:2.1rem;">Doe via Pix</h2>
+          <p>Sua contribuição, de qualquer valor, sustenta diretamente as atividades da associação com crianças, adolescentes, idosos e famílias em situação de vulnerabilidade.</p>
+        </div>
+        <div class="pix__card">
+          <img src="images/pix-qrcode.png" alt="QR Code Pix para doação à Associação Beneficente Totus Tuus" class="pix__qr">
+          <button type="button" class="btn btn--gold pix__copy-btn" id="pixCopyCode" data-copy-text="00020101021126360014br.gov.bcb.pix0114+55859978609815204000053039865802BR5921ASSOCIACAO TOTUS TUUS6009FORTALEZA62070503***630463BE">Copiar código Pix</button>
+          <div class="pix__manual">
+            <span>Ou pela chave (telefone)</span>
+            <button type="button" class="pix__key" id="pixCopyKey" data-copy-text="85997860981">85997860981</button>
+          </div>
+          <p class="pix__status" id="pixStatus" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ TRANSPARÊNCIA ============ -->
+  <section class="transparencia">
+    <div class="container transparencia__inner">
+      <div class="transparencia__item"><strong>Associação civil</strong>sem fins econômicos</div>
+      <div class="transparencia__item"><strong>Fundada em 30/10/2025</strong>registrada em 06/11/2025</div>
+      <div class="transparencia__item"><strong>3º R.P.J. de Fortaleza-CE</strong>Averbação nº 5053820</div>
+      <div class="transparencia__item"><strong>Diretoria atual</strong>mandato de 30/10/2025 a 30/10/2029</div>
+      <div class="transparencia__item"><strong>CNPJ</strong><span class="placeholder">a inserir</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CONTATO ============ -->
+  <section class="contato" id="contato">
+    <div class="container contato__grid">
+      <div>
+        <p class="eyebrow">Fale com a gente</p>
+        <h2 style="font-size:2.1rem;">Vamos conversar</h2>
+        <div class="contato__list">
+          <div class="contato__item">
+            <svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px;"><path d="M12 22s7-6.2 7-12A7 7 0 1 0 5 10c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            <div><h4>Endereço</h4><p>Rua Oliveira Sobrinho, 3143, Granja Lisboa<br>Fortaleza (CE), CEP 60540-448</p></div>
+          </div>
+          <div class="contato__item">
+            <svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px;"><path d="M3 5.5C3 4.7 3.7 4 4.5 4H8l2 5-2.5 1.5a13 13 0 0 0 6 6L15 14l5 2v3.5c0 .8-.7 1.5-1.5 1.5C10.5 21 3 13.5 3 5.5Z"/></svg>
+            <div><h4>Telefone / WhatsApp</h4><p class="placeholder">a inserir</p></div>
+          </div>
+          <div class="contato__item">
+            <svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px;"><path d="M3.5 5.5h17v13h-17z"/><path d="M3.5 6l8.5 7 8.5-7"/></svg>
+            <div><h4>E-mail</h4><p class="placeholder">a inserir</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="mapa">
+        <iframe src="https://www.google.com/maps?q=Rua+Oliveira+Sobrinho%2C+3143+-+Granja+Lisboa%2C+Fortaleza+-+CE%2C+60540-448&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa com a localização da sede da Associação Beneficente Totus Tuus"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="container">
+    <div class="rodape__grid">
+      <div>
+        <div class="rodape__brand">
+          <img src="images/logo.jpg" alt="Logotipo da Associação Beneficente Totus Tuus">
+        </div>
+        <p>Associação civil sem fins lucrativos, a serviço de crianças, adolescentes, idosos e famílias em situação de vulnerabilidade em Fortaleza (CE).</p>
+      </div>
+      <div>
+        <h5>Navegação</h5>
+        <div class="rodape__links">
+          <a href="#quem-somos">Quem Somos</a>
+          <a href="#atuacao">Nossa Atuação</a>
+          <a href="#em-acao">Em Ação</a>
+          <a href="#ajudar">Como Ajudar</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </div>
+      <div>
+        <h5>Contato</h5>
+        <div class="rodape__links">
+          <span>Rua Oliveira Sobrinho, 3143</span>
+          <span>Granja Lisboa, Fortaleza (CE)</span>
+          <span>CEP 60540-448</span>
+        </div>
+      </div>
+    </div>
+    <div class="rodape__bottom">
+      <span>© 2026 Associação Beneficente Totus Tuus. Todos os direitos reservados.</span>
+      <span>Feito com cuidado para servir.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 60) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Mobile nav toggle
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Botões de copiar (Pix): código completo (Copia e Cola) e chave manual
+  async function copyToClipboard(text, statusEl, label) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      if (statusEl) {
+        statusEl.textContent = label + ' copiado!';
+        setTimeout(() => { statusEl.textContent = ''; }, 2500);
+      }
+    } catch (err) {
+      if (statusEl) statusEl.textContent = 'Não foi possível copiar automaticamente. Copie manualmente: ' + text;
+    }
+  }
+  const pixStatus = document.getElementById('pixStatus');
+  const pixCopyCode = document.getElementById('pixCopyCode');
+  const pixCopyKey = document.getElementById('pixCopyKey');
+  if (pixCopyCode) pixCopyCode.addEventListener('click', () => copyToClipboard(pixCopyCode.dataset.copyText, pixStatus, 'Código Pix'));
+  if (pixCopyKey) pixCopyKey.addEventListener('click', () => copyToClipboard(pixCopyKey.dataset.copyText, pixStatus, 'Chave Pix'));
+</script>
+</body>
+</html>
